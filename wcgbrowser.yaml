@@ -5,7 +5,7 @@
 # This is the "home page" for your kiosk.  It will start here, and return here if reset
 # Default: about:blank
 
-start_url: "http://www.alandmoore.com/wcgbrowser/wcgbrowser.html"
+start_url: ""
 
 # The "whitelist" is a list of domains or hosts which will be matched against any requested url.
 # If the hostname or domain name doesn't match an item on the list, the user gets the "Cannot go there" message
@@ -48,7 +48,7 @@ timeout: 1800
 # to the screensaver_url.  Any activity will take you back to the start_url from there.
 # default is 'reset'
 
-timeout_mode: 'reset'
+timeout_mode: 'close'
 
 # "screensaver_url" defines the URL the browser should go to in screensaver mode
 # default is "about:blank"
@@ -105,12 +105,12 @@ fullscreen: False
 # it is ignored if "fullscreen" is set (either in the config or commandline)
 # default: None
 
-#window_size: 'max'
+window_size: 'max'
 
 # Set "navigation" to false to hide the top navigation bar.  Note that this makes bookmarks basically useless, since they won't appear.
 # Default: True
 
-#navigation: True
+navigation: False
 
 # "navigation_layout" is a list which sets the order and presence of buttons on the navbar from left to right.
 # Valid values include "back", "forward", "refresh", "stop", "zoom_in", "zoom_out", "bookmarks", "print",  and "quit".
@@ -188,7 +188,7 @@ icon_theme:  "oxygen"
 # privacy_mode Configures whether or not "Private Browsing" mode is enabled on the webkit widget.
 # Default: True
 
-#privacy_mode: False
+privacy_mode: True
 
 # user_agent allows the user agent string to be overriden, useful for impersonating other browsers.
 # Default: WebKit default user agent
@@ -222,21 +222,21 @@ icon_theme:  "oxygen"
 # (e.g., in the example alt-B would activate the bookmark)
 # Default: empty
 
-bookmarks:
-  1:
-    name: "WCGBrowser Website"
-    url: "http://www.alandmoore.com/wcgbrowser/wcgbrowser.html"
-    description: "WCGBrowser main website."
-
-  2:
-    name: "WCGBrowser &Github"
-    url: "http://github.com/alandmoore/wcgbrowser"
-    description:  "WCGBrowser source code on GitHub"
-
-  3:
-    name: "Thought Bucket"
-    url: "http://www.alandmoore.com/blog"
-    description:  "Blog of Alan D Moore (primary author/maintainer of WCGBrowser)."
+# bookmarks:
+#   1:
+#     name: "WCGBrowser Website"
+#     url: "http://www.alandmoore.com/wcgbrowser/wcgbrowser.html"
+#     description: "WCGBrowser main website."
+# 
+#   2:
+#     name: "WCGBrowser &Github"
+#     url: "http://github.com/alandmoore/wcgbrowser"
+#     description:  "WCGBrowser source code on GitHub"
+# 
+#   3:
+#     name: "Thought Bucket"
+#     url: "http://www.alandmoore.com/blog"
+#     description:  "Blog of Alan D Moore (primary author/maintainer of WCGBrowser)."
 
 
 # External Content
@@ -252,7 +252,7 @@ bookmarks:
 # The format is
 # "content-type": "program to open with"
 # The filename of the downloaded data will be passed as an argument
-
-content_handlers:
-  "application/pdf": "acroread"
-  "application/vnd.oasis.opendocument.text": "libreoffice"
+# 
+# content_handlers:
+#   "application/pdf": "acroread"
+#   "application/vnd.oasis.opendocument.text": "libreoffice"

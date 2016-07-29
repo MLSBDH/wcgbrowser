@@ -80,9 +80,11 @@ import os
 import argparse
 import yaml
 import re
+import requests
 import subprocess
 import datetime
 
+from bs4 import BeautifulSoup
 from functools import partial
 
 # MESSAGE STRINGS
@@ -290,7 +292,7 @@ class MainWindow(QMainWindow):
         """Construct a MainWindow Object."""
         super(MainWindow, self).__init__(parent)
         # Load config file
-        self.setWindowTitle("Browser")
+        self.setWindowTitle("MLS Assessment Browser")
         debug("loading configuration from '{}'".format(options.config_file))
         configfile = {}
         if options.config_file:
@@ -902,10 +904,17 @@ class WcgWebView(QWebView):
                     )
                     self.setHtml(self.config.get("page_unavailable_html")
                                  .format(**self.config))
+            if 'https://app.schoology.com/home' in url.toString():
+                self.setHtml(self.config.get("page_unavailable_html")
+                                 .format(**self.config))
             if not url.isValid():
                 debug("Invalid URL {}".format(url.toString()))
             else:
                 debug("Load URL {}".format(url.toString()))
+            #newstuff = BeautifulSoup(requests.get(url.toString()).text, 'html.parser')
+            #if newstuff.find('div', {'id': 'header'}):
+                #[x.extract() for x in newstuff.find('div', {'id': 'header'})]
+            #self.setHtml(str(newstuff))
 
     def onLoadFinished(self, ok):
         """Handle loadFinished events.
@@ -1020,6 +1029,18 @@ class WCGWebPage(QWebPage):
         """Constructor for the class"""
         super(WCGWebPage, self).__init__(parent)
         self.config = config or {}
+        self.mf = self.mainFrame()
+        self.mf.loadFinished.connect(self.remove_elements)
+        
+    def remove_elements(self):
+        header = self.mf.findFirstElement('div#header')
+        breadcrumbs = self.mf.findFirstElement('div#center-top')
+        sidebar = self.mf.findFirstElement('div#sidebar-left')
+        footer = self.mf.findFirstElement('div#footer')
+        header.removeFromDocument()
+        breadcrumbs.removeFromDocument()
+        sidebar.removeFromDocument()
+        footer.removeFromDocument()
 
     def javaScriptConsoleMessage(self, message, line, sourceid):
         """Handle console.log messages from javascript.
