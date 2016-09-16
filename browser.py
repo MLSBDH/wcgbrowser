@@ -80,11 +80,9 @@ import os
 import argparse
 import yaml
 import re
-import requests
 import subprocess
 import datetime
 
-from bs4 import BeautifulSoup
 from functools import partial
 
 # MESSAGE STRINGS
