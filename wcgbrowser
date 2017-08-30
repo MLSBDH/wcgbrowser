@@ -5,4 +5,4 @@
 # Edit it to fit your system
 
 cd /opt/wcgbrowser
-python browser.py $@
+python3 browser.py $@
